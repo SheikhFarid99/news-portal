@@ -6,6 +6,9 @@ import Login from './dashboard/pages/Login'
 import ProtectDashboatd from './middleware/ProtectDashboatd'
 import ProtectRole from './middleware/ProtectRole'
 import Unable from './dashboard/pages/Unable'
+import AddWriter from './dashboard/pages/AddWriter'
+import Writers from './dashboard/pages/Writers'
+import News from './dashboard/pages/News'
 
 function App() {
 
@@ -16,9 +19,12 @@ function App() {
         <Route path='/dashboard' element={<ProtectDashboatd />} >
           <Route path='' element={<MainLayout />}>
             <Route path='' element={<Navigate to='/dashboard/admin' />} />
-            <Route path='unable-access' element={<Unable/>} />
+            <Route path='unable-access' element={<Unable />} />
+            <Route path='news' element={<News />} />
             <Route path='' element={<ProtectRole role='admin' />} >
               <Route path='admin' element={<AdminIndex />} />
+              <Route path='writer/add' element={<AddWriter />} />
+              <Route path='writers' element={<Writers />} />
             </Route>
           </Route>
         </Route>
