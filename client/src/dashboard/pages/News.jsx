@@ -16,7 +16,7 @@ const News = () => {
                 }
 
             </div>
-            <NewContent/>
+            <NewContent />
         </div>
     )
 }
