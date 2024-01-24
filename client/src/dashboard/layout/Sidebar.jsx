@@ -1,15 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { AiFillDashboard, AiOutlinePlus } from 'react-icons/ai'
 import { ImProfile } from 'react-icons/im'
 import { BiNews } from 'react-icons/bi'
 import { FiUsers } from 'react-icons/fi'
 import { FaPlus } from "react-icons/fa";
+import storeContext from '../../context/storeContext'
 
 const Sidebar = () => {
 
     const { pathname } = useLocation()
-
+    const { store } = useContext(storeContext)
     const userInfo = {
         role: "writer"
     }
@@ -22,7 +23,7 @@ const Sidebar = () => {
             </div>
             <ul className='px-3 flex flex-col gap-y-1 font-medium'>
                 {
-                    userInfo.role === 'admin' ? <>
+                    store.userInfo?.role === 'admin' ? <>
                         <li>
                             <Link to='/dashboard/admin' className={`px-3 ${pathname === '/dashboard/admin' ? 'bg-indigo-500 text-white' : 'bg-white text-[#404040f6]'} py-2 hover:shadow-lg hover:shadow-indigo-500/20 w-full rounded-sm flex gap-x-2 justify-start items-center hover:bg-indigo-500 hover:text-white`}>
                                 <span className='text-xl'><AiFillDashboard /></span>

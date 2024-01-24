@@ -1,7 +1,47 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { base_url } from '../../config/config'
+import axios from 'axios'
+import storeContext from '../../context/storeContext'
+import toast from 'react-hot-toast'
 
 const AddWriter = () => {
+
+  const { store } = useContext(storeContext)
+  const [state, setState] = useState({
+    name: "",
+    category: "",
+    email: '',
+    password: ""
+  })
+
+  const inputHandle = (e) => {
+    setState({
+      ...state,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  const [loader, setLoader] = useState(false)
+
+  const submit = async (e) => {
+    e.preventDefault()
+    try {
+      setLoader(true)
+      const { data } = await axios.post(`${base_url}/api/writer/add`, state, {
+        headers: {
+          "Authorization": `Bearer ${store.token}`
+        }
+      })
+      setLoader(false)
+      console.log(data)
+      toast.success(data.message)
+    } catch (error) {
+      setLoader(false)
+      console.log(error)
+      toast.error(error.response.data.message)
+    }
+  }
 
   return (
     <div className='bg-white rounded-md'>
@@ -10,15 +50,15 @@ const AddWriter = () => {
         <Link className='px-3 py-[6px] bg-purple-500 rounded-sm text-white hover:bg-purple-600' to='/dashboard/writers'>Writers</Link>
       </div>
       <div className='p-4'>
-        <form>
+        <form onSubmit={submit}>
           <div className='grid grid-cols-2 gap-x-8 mb-3'>
             <div className='flex flex-col gap-y-2'>
               <label className='text-md font-medium text-gray-600' htmlFor="name">Name</label>
-              <input type="text" placeholder='name' name='name' className='px-3 py-2 rounded-md outline-0 border border-gray-300 focus:border-green-500 h-10' id='name' />
+              <input onChange={inputHandle} value={state.name} required type="text" placeholder='name' name='name' className='px-3 py-2 rounded-md outline-0 border border-gray-300 focus:border-green-500 h-10' id='name' />
             </div>
             <div className='flex flex-col gap-y-2'>
               <label className='text-md font-medium text-gray-600' htmlFor="category">Category</label>
-              <select name='category' id='category' className='px-3 py-2 rounded-md outline-0 border border-gray-300 focus:border-green-500 h-10' >
+              <select onChange={inputHandle} value={state.category} required name='category' id='category' className='px-3 py-2 rounded-md outline-0 border border-gray-300 focus:border-green-500 h-10' >
                 <option value="">---select category---</option>
                 <option value="Education">Education</option>
                 <option value="Travel">Travel</option>
@@ -32,17 +72,17 @@ const AddWriter = () => {
           <div className='grid grid-cols-2 gap-x-8 mb-3'>
             <div className='flex flex-col gap-y-2'>
               <label className='text-md font-medium text-gray-600' htmlFor="email">Email</label>
-              <input type="email" placeholder='email' name='email' className='px-3 py-2 rounded-md outline-0 border border-gray-300 focus:border-green-500 h-10' id='email' />
+              <input onChange={inputHandle} value={state.email} required type="email" placeholder='email' name='email' className='px-3 py-2 rounded-md outline-0 border border-gray-300 focus:border-green-500 h-10' id='email' />
             </div>
             <div className='flex flex-col gap-y-2'>
               <div className='flex flex-col gap-y-2'>
                 <label className='text-md font-medium text-gray-600' htmlFor="password">Password</label>
-                <input type="password" placeholder='password' name='password' className='px-3 py-2 rounded-md outline-0 border border-gray-300 focus:border-green-500 h-10' id='password' />
+                <input onChange={inputHandle} value={state.password} required type="password" placeholder='password' name='password' className='px-3 py-2 rounded-md outline-0 border border-gray-300 focus:border-green-500 h-10' id='password' />
               </div>
             </div>
           </div>
           <div className='mt-4'>
-            <button className='px-3 py-[6px] bg-purple-500 rounded-sm text-white hover:bg-purple-600' >Add Writer</button>
+            <button disabled={loader} className='px-3 py-[6px] bg-purple-500 rounded-sm text-white hover:bg-purple-600' >{loader ? 'loading...' : 'Add Writer'}</button>
           </div>
         </form>
       </div>
