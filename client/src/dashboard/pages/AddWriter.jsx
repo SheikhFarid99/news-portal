@@ -5,6 +5,7 @@ import axios from 'axios'
 import { base_url } from '../../config/config'
 import storeContext from '../../context/storeContext'
 
+
 const AddWriter = () => {
 
   const { store } = useContext(storeContext)
@@ -74,7 +75,7 @@ const AddWriter = () => {
             </div>
           </div>
           <div className='mt-4'>
-            <button className='px-3 py-[6px] bg-purple-500 rounded-sm text-white hover:bg-purple-600' >Add Writer</button>
+            <button disabled={loader} className='px-3 py-[6px] bg-purple-500 rounded-sm text-white hover:bg-purple-600' >{loader ? 'loading...' : 'Add Writer'}</button>
           </div>
         </form>
       </div>
