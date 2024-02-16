@@ -2,9 +2,15 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { AiOutlineClose } from "react-icons/ai";
 import { MdCloudUpload } from "react-icons/md";
+import copy from 'copy-text-to-clipboard'
+import toast from 'react-hot-toast';
 
 const Galler = ({ setShow, images }) => {
 
+    const copy_url = (url)=>{
+        copy(url)
+        toast.success('copu success')
+    }
     return (
         <div className='w-screen h-screen fixed left-0 top-0 z-[9999]'>
             <div className='w-full h-full relative'>
@@ -18,16 +24,20 @@ const Galler = ({ setShow, images }) => {
                     </div>
 
                     <div>
-                        <label htmlFor="img" className={`w-full h-[180px] flex rounded text-[#404040] gap-2 justify-center items-center cursor-pointer border-2 border-dashed`}>
+                        <label htmlFor="images" className={`w-full h-[180px] flex rounded text-[#404040] gap-2 justify-center items-center cursor-pointer border-2 border-dashed`}>
                             <div className='flex justify-center items-center flex-col gap-y-2'>
                                 <span className='text-2xl'><MdCloudUpload /></span>
                                 <span>Select Image</span>
                             </div>
                         </label>
-                        <input className='hidden' type="file" id='img' />
+                        
                     </div>
-                    <div className='grid grid-cols-4 gap-x2'>
-                        <div></div>
+                    <div className='grid grid-cols-4 gap-x-2 mt-3'>
+                        {
+                            images.length>0 && images.map((img,i)=><div className=' cursor-pointer' onClick={()=>copy_url(img.url)} key={i}  >
+                                <img src={img.url} alt="image" className='w-full h-[100px]' />
+                            </div>)
+                        }
                     </div>
                 </div>
             </div>

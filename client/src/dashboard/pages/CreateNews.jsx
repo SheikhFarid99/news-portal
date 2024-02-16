@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { MdCloudUpload } from "react-icons/md";
 import JoditEditor from 'jodit-react'
@@ -53,6 +53,54 @@ const CreateNews = () => {
             toast.success(error.response.data.message)
         }
     }
+    const [images, setImages] = useState([])
+
+    const get_images = async () => {
+        try {
+            const { data } = await axios.get(`${base_url}/api/images`, {
+                headers: {
+                    "Authorization": `Bearer ${store.token}`
+                }
+            })
+            console.log(data.images)
+            setImages(data.images)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+        get_images()
+    }, [])
+
+    const [imagesLoader, setImagesLoader] = useState(false)
+
+    const imageHandler = async (e) => {
+        const files = e.target.files
+        try {
+            const formData = new FormData()
+            for (let i = 0; i < files.length; i++) {
+                formData.append('images', files[i])
+
+            }
+
+            setImagesLoader(true)
+
+            const { data } = await axios.post(`${base_url}/api/images/add`, formData, {
+                headers: {
+                    "Authorization": `Bearer ${store.token}`
+                }
+            })
+            setImagesLoader(false)
+            setImages([...images, data.images])
+            toast.success(data.message)
+
+        } catch (error) {
+            console.log(error)
+            setImagesLoader(false)
+            toast.error(error.response.data.message)
+        }
+    }
 
 
     return (
@@ -101,13 +149,14 @@ const CreateNews = () => {
                     </div>
 
                     <div className='mt-4'>
-                        <button disabled={loader} className='px-3 py-[6px] bg-purple-500 rounded-sm text-white hover:bg-purple-600' > {loader ? 'loading...':'Add News'}</button>
+                        <button disabled={loader} className='px-3 py-[6px] bg-purple-500 rounded-sm text-white hover:bg-purple-600' > {loader ? 'loading...' : 'Add News'}</button>
                     </div>
 
                 </form>
             </div>
+            <input onChange={imageHandler} type="file" multiple id='images' />
             {
-                show && <Galler setShow={setShow} images={[]} />
+                show && <Galler setShow={setShow} images={images} />
             }
         </div>
     )
