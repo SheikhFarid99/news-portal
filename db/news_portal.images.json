@@ -1,0 +1,160 @@
+[{
+  "_id": {
+    "$oid": "6525ece89e29740c6d445742"
+  },
+  "writerId": {
+    "$oid": "65219a74eda1b0d696ec938b"
+  },
+  "url": "http://res.cloudinary.com/dpj4vsqbo/image/upload/v1696937503/news/av4wrjgonfu0a2s1acwu.jpg",
+  "createdAt": {
+    "$date": "2023-10-11T00:31:36.273Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-11T00:31:36.273Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6525f323a3806bc849d8c131"
+  },
+  "writerId": {
+    "$oid": "65209087550949f47afac791"
+  },
+  "url": "http://res.cloudinary.com/dpj4vsqbo/image/upload/v1696939098/news/lglqgkkkft0mfkvemgrx.jpg",
+  "createdAt": {
+    "$date": "2023-10-11T00:58:11.816Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-11T00:58:11.816Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652622e3106ada5d97a1dd80"
+  },
+  "writerId": {
+    "$oid": "6526030a09d999bd1a49daa3"
+  },
+  "url": "http://res.cloudinary.com/dpj4vsqbo/image/upload/v1696951322/news/gnmzghfrqilbfpeh0fse.jpg",
+  "createdAt": {
+    "$date": "2023-10-11T04:21:55.478Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-11T04:21:55.478Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652623fa106ada5d97a1dd9d"
+  },
+  "writerId": {
+    "$oid": "6526030a09d999bd1a49daa3"
+  },
+  "url": "http://res.cloudinary.com/dpj4vsqbo/image/upload/v1696951601/news/aiwetwfiyxrpsi6h6qmk.jpg",
+  "createdAt": {
+    "$date": "2023-10-11T04:26:34.494Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-11T04:26:34.494Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652625cd106ada5d97a1dda9"
+  },
+  "writerId": {
+    "$oid": "6526030a09d999bd1a49daa3"
+  },
+  "url": "http://res.cloudinary.com/dpj4vsqbo/image/upload/v1696952067/news/vkbe2bvynn46eacwxxah.webp",
+  "createdAt": {
+    "$date": "2023-10-11T04:34:21.007Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-11T04:34:21.007Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652626ba106ada5d97a1ddb5"
+  },
+  "writerId": {
+    "$oid": "6526030a09d999bd1a49daa3"
+  },
+  "url": "http://res.cloudinary.com/dpj4vsqbo/image/upload/v1696952305/news/gjtq8o6yhseg2yulnrne.webp",
+  "createdAt": {
+    "$date": "2023-10-11T04:38:18.854Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-11T04:38:18.854Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652627dc106ada5d97a1ddc1"
+  },
+  "writerId": {
+    "$oid": "6526030a09d999bd1a49daa3"
+  },
+  "url": "http://res.cloudinary.com/dpj4vsqbo/image/upload/v1696952595/news/gru1egdu7w4kyx4wtnfc.jpg",
+  "createdAt": {
+    "$date": "2023-10-11T04:43:08.662Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-11T04:43:08.662Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65262b34aa71dd44cbe6f2b2"
+  },
+  "writerId": {
+    "$oid": "65209087550949f47afac791"
+  },
+  "url": "https://res.cloudinary.com/dpj4vsqbo/image/upload/v1696653419/news/imagasdae_scbwom.jpg",
+  "createdAt": {
+    "$date": "2023-10-11T00:31:36.273Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-11T00:31:36.273Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65262bd4aa71dd44cbe6f2b6"
+  },
+  "writerId": {
+    "$oid": "65219a74eda1b0d696ec938b"
+  },
+  "url": "https://res.cloudinary.com/dpj4vsqbo/image/upload/v1696654447/news/cricket-news-today-live_138af1602_fwdwb9.jpg",
+  "createdAt": {
+    "$date": "2023-10-11T00:31:36.273Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-11T00:31:36.273Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6598be4a663a46defda5d888"
+  },
+  "writerId": {
+    "$oid": "65219a74eda1b0d696ec938b"
+  },
+  "url": "http://res.cloudinary.com/dpj4vsqbo/image/upload/v1704469385/news/kctma1d6fb9t2gubygsm.jpg",
+  "createdAt": {
+    "$date": "2024-01-06T02:43:22.766Z"
+  },
+  "updatedAt": {
+    "$date": "2024-01-06T02:43:22.766Z"
+  },
+  "__v": 0
+}]

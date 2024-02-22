@@ -72,8 +72,24 @@ class newsController {
             }
 
             const image = await galleryModel.insertMany(allImages)
-            return res.status(201).json({ images: image,message : "images uplaod success" })
+            return res.status(201).json({ images: image, message: "images uplaod success" })
 
+        } catch (error) {
+            console.log(error.message)
+            return res.status(500).json({ message: 'Internal server error' })
+        }
+    }
+
+    get_dashboard_news = async (req, res) => {
+        const { id, role } = req.userInfo
+        try {
+            if (role === 'admin') {
+                const news = await newsModel.find({}).sort({ createdAt: -1 })
+                return res.status(200).json({ news })
+            } else {
+                const news = await newsModel.find({ writerId: new ObjectId(id) }).sort({ createdAt: -1 })
+                return res.status(200).json({ news })
+            }
         } catch (error) {
             console.log(error.message)
             return res.status(500).json({ message: 'Internal server error' })

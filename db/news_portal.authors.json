@@ -1,0 +1,119 @@
+[{
+  "_id": {
+    "$oid": "651f05dc968c6e500553ce80"
+  },
+  "name": "Sheikh Farid",
+  "email": "farid@gmail.com",
+  "password": "$2a$10$nNf4ByvnrgdDuya0Ix3d6eZKQqo.NK9pjlLsTjuAP8SbvVUahAxTK",
+  "image": "https://res.cloudinary.com/dpj4vsqbo/image/upload/v1696585286/unnamed_tqajqw.jpg",
+  "role": "admin",
+  "category": "all"
+},
+{
+  "_id": {
+    "$oid": "65209025550949f47afac78e"
+  },
+  "name": "Anamul Islam",
+  "email": "anamul@gmail.com",
+  "password": "$2b$10$BJL4g4hgqBnvAyUR969Ud.5XBtw3/T9hiWPV1lVN257F3DkC5GeGe",
+  "image": "http://res.cloudinary.com/dpj4vsqbo/image/upload/v1698330164/news/q9bg4lez0xs4u9wyqw86.jpg",
+  "role": "writer",
+  "category": "Education",
+  "createdAt": {
+    "$date": "2023-10-06T22:54:29.262Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-27T03:22:48.632Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65209087550949f47afac791"
+  },
+  "name": "Himel Islam",
+  "email": "himel@gmail.com",
+  "password": "$2b$10$2T3EjvZ4oevyEhOmscNqle6r5IR0HDIPwAhdi3vg.gCO7G6yFEgxK",
+  "image": "",
+  "role": "writer",
+  "category": "Technology",
+  "createdAt": {
+    "$date": "2023-10-06T22:56:07.349Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-06T22:56:07.349Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65219a74eda1b0d696ec938b"
+  },
+  "name": "Samim Islam",
+  "email": "samim@gmail.com",
+  "password": "$2b$10$yp1KrFuPY9aQnOBt.HwvkeqMswmAFsC.2rYW7sPAnMDSuT3UZAQAC",
+  "image": "http://res.cloudinary.com/dpj4vsqbo/image/upload/v1704456081/news/pndiprrepjakaud8zccm.jpg",
+  "role": "writer",
+  "category": "Sports",
+  "createdAt": {
+    "$date": "2023-10-07T17:50:44.935Z"
+  },
+  "updatedAt": {
+    "$date": "2024-01-05T23:32:47.755Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652602ad09d999bd1a49da9d"
+  },
+  "name": "Moshiur Rahman",
+  "email": "moshiur@gmail.com",
+  "password": "$2b$10$0ItieGfL3RiX1/8D4CfCHupC.izSzjtPbFS.kqCgDlHLhHRReNIna",
+  "image": "",
+  "role": "writer",
+  "category": "International",
+  "createdAt": {
+    "$date": "2023-10-11T02:04:29.863Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-11T02:04:29.863Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652602e409d999bd1a49daa0"
+  },
+  "name": "Sabbir Islam",
+  "email": "sabbir@gmail.com",
+  "password": "$2b$10$f0XirEJxTyaTDyCXyFwJe.5XNHLpIDewK5A/kogXvFABJiOXF8QTC",
+  "image": "",
+  "role": "writer",
+  "category": "Health",
+  "createdAt": {
+    "$date": "2023-10-11T02:05:24.864Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-11T02:05:24.864Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6526030a09d999bd1a49daa3"
+  },
+  "name": "Suvro Islam",
+  "email": "suvro@gmail.com",
+  "password": "$2b$10$Tp.4cSYp.5NzTQS1bDEnMeC54/Ff78s13kYfcyY7cO6/38oR1Hqji",
+  "image": "",
+  "role": "writer",
+  "category": "Travel",
+  "createdAt": {
+    "$date": "2023-10-11T02:06:02.038Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-11T02:06:02.038Z"
+  },
+  "__v": 0
+}]
