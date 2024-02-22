@@ -7,7 +7,7 @@ import storeContext from '../../context/storeContext'
 
 
 const AddWriter = () => {
-  
+
   const navigate = useNavigate()
   const { store } = useContext(storeContext)
 
@@ -23,7 +23,7 @@ const AddWriter = () => {
       [e.target.name]: e.target.value
     })
   }
-  const [loader,setLoader] = useState(false)
+  const [loader, setLoader] = useState(false)
 
   const submit = async (e) => {
     e.preventDefault()
@@ -82,7 +82,7 @@ const AddWriter = () => {
             </div>
           </div>
           <div className='mt-4'>
-            <button disabled={loader}  className='px-3 py-[6px] bg-purple-500 rounded-sm text-white hover:bg-purple-600' >{loader ? 'Loading...':'Add Writer'}</button>
+            <button disabled={loader} className='px-3 py-[6px] bg-purple-500 rounded-sm text-white hover:bg-purple-600' >{loader ? 'Loading...' : 'Add Writer'}</button>
           </div>
         </form>
       </div>

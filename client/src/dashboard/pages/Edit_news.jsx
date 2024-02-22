@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { MdCloudUpload } from "react-icons/md";
 import JoditEditor from 'jodit-react'
 import Galler from '../components/Galler';
@@ -8,12 +8,15 @@ import axios from 'axios'
 import storeContext from '../../context/storeContext'
 import toast from 'react-hot-toast'
 
-const CreateNews = () => {
+const Edit_news = () => {
+
+    const { news_id } = useParams()
 
     const { store } = useContext(storeContext)
     const [show, setShow] = useState(false)
     const editor = useRef(null)
 
+    const [old_image, set_old_image] = useState('')
     const [title, setTitle] = useState('')
     const [image, setImage] = useState('')
     const [img, setImg] = useState('')
@@ -36,11 +39,12 @@ const CreateNews = () => {
         const formData = new FormData()
         formData.append('title', title)
         formData.append('description', description)
-        formData.append('image', image)
+        formData.append('new_image', image)
+        formData.append('old_image', old_image)
 
         try {
             setLoader(true)
-            const { data } = await axios.post(`${base_url}/api/news/add`, formData, {
+            const { data } = await axios.put(`${base_url}/api/news/update/${news_id}`, formData, {
                 headers: {
                     "Authorization": `Bearer ${store.token}`
                 }
@@ -102,6 +106,26 @@ const CreateNews = () => {
         }
     }
 
+    const get_news = async () => {
+        try {
+            const { data } = await axios.get(`${base_url}/api/news/${news_id}`, {
+                headers: {
+                    "Authorization": `Bearer ${store.token}`
+                }
+            })
+            setTitle(data?.news?.title)
+            setDescription(data?.news?.description)
+            setImg(data?.news?.image)
+            set_old_image(data?.news?.image)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+        get_news()
+    }, [news_id])
+
 
     return (
         <div className='bg-white rounded-md'>
@@ -127,7 +151,7 @@ const CreateNews = () => {
                                     </div>
                                 }
                             </label>
-                            <input required onChange={imageHandle} className='hidden' type="file" id='img' />
+                            <input onChange={imageHandle} className='hidden' type="file" id='img' />
                         </div>
                     </div>
                     <div className='flex flex-col gap-y-2 mb-6'>
@@ -149,7 +173,7 @@ const CreateNews = () => {
                     </div>
 
                     <div className='mt-4'>
-                        <button disabled={loader} className='px-3 py-[6px] bg-purple-500 rounded-sm text-white hover:bg-purple-600' > {loader ? 'loading...' : 'Add News'}</button>
+                        <button disabled={loader} className='px-3 py-[6px] bg-purple-500 rounded-sm text-white hover:bg-purple-600' > {loader ? 'loading...' : 'Update News'}</button>
                     </div>
 
                 </form>
@@ -162,4 +186,4 @@ const CreateNews = () => {
     )
 }
 
-export default CreateNews
+export default Edit_news

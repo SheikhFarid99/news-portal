@@ -13,10 +13,11 @@ import Profile from './dashboard/pages/Profile'
 import WriterIndex from './dashboard/pages/WriterIndex'
 import CreateNews from './dashboard/pages/CreateNews'
 import storeContext from './context/storeContext'
+import Edit_news from './dashboard/pages/Edit_news'
 
 function App() {
-  
-  const {store} = useContext(storeContext)
+
+  const { store } = useContext(storeContext)
 
   return (
     <BrowserRouter>
@@ -38,6 +39,7 @@ function App() {
             <Route path='' element={<ProtectRole role='writer' />} >
               <Route path='writer' element={<WriterIndex />} />
               <Route path='news/create' element={<CreateNews />} />
+              <Route path='news/edit/:news_id' element={<Edit_news />} />
             </Route>
 
           </Route>
