@@ -77,6 +77,19 @@ class newsController {
         }
     }
 
+    update_news_update = async (req, res) => {
+        const { role } = req.userInfo
+        const { news_id } = req.params
+        const { status } = req.body
+
+        if (role === 'admin') {
+            const news = await newsModel.findByIdAndUpdate(news_id, { status }, { new: true })
+            return res.status(200).json({ message: 'news status update success', news })
+        } else {
+            return res.status(401).json({ message: 'You cannot access this api' })
+        }
+    }
+
     get_images = async (req, res) => {
         const { id } = req.userInfo
 
@@ -145,6 +158,82 @@ class newsController {
             return res.status(500).json({ message: 'Internal server error' })
         }
     }
-}
 
+
+    // website
+
+    get_all_news = async (req, res) => {
+        try {
+            const category_news = await newsModel.aggregate([
+                {
+                    $sort: { createdAt: -1 }
+                },
+                {
+                    $match: {
+                        status: 'active'
+                    }
+                },
+                {
+                    $group: {
+                        _id: "$category",
+                        news: {
+                            $push: {
+                                _id: '$_id',
+                                title: '$title',
+                                slug: '$slug',
+                                writerName: '$writerName',
+                                image: '$image',
+                                description: '$description',
+                                date: '$date',
+                                category: '$category'
+                            }
+                        }
+                    }
+                },
+                {
+                    $project: {
+                        _id: 0,
+                        category: '$_id',
+                        news: {
+                            $slice: ['$news', 5]
+                        }
+                    }
+                }
+            ])
+
+            const news = {}
+            for (let i = 0; i < category_news.length; i++) {
+                news[category_news[i].category] = category_news[i].news
+            }
+            return res.status(200).json({ news })
+        } catch (error) {
+            console.log(error.message)
+            return res.status(500).json({ message: 'Internal server error' })
+        }
+    }
+
+    get_categories = async (req, res) => {
+        try {
+            const categories = await newsModel.aggregate([
+                {
+                    $group: {
+                        _id: '$category',
+                        count: { $sum: 1 }
+                    }
+                },
+                {
+                    $project: {
+                        _id: 0,
+                        category: "$_id",
+                        count: 1
+                    }
+                }
+            ])
+            return res.status(200).json({ categories })
+        } catch (error) {
+            console.log(error.message)
+            return res.status(500).json({ message: 'Internal server error' })
+        }
+    }
+}
 module.exports = new newsController()

@@ -6,6 +6,8 @@ import axios from 'axios'
 import { base_url } from '../../config/config'
 import storeContext from '../../context/storeContext'
 import { convert } from 'html-to-text'
+import toast from 'react-hot-toast'
+
 const NewContent = () => {
 
     const { store } = useContext(storeContext)
@@ -66,6 +68,38 @@ const NewContent = () => {
         setPage(1)
         setParPage(5)
     }
+    const [res, set_res] = useState({
+        id: '',
+        loader: false
+    })
+    const update_status = async (status, news_id) => {
+        try {
+            set_res(
+                {
+                    id: news_id,
+                    loader: true
+                }
+            )
+            const { data } = await axios.put(`${base_url}/api/news/status-update/${news_id}`, { status }, {
+                headers: {
+                    'Authorization': `Bearer ${store.token}`
+                }
+            })
+            set_res({
+                id: '',
+                loader: false
+            })
+            toast.success(data.message)
+            get_news()
+        } catch (error) {
+            set_res({
+                id: '',
+                loader: false
+            })
+            console.log(error)
+            toast.error(error.response.data.message)
+        }
+    }
 
     return (
         <div>
@@ -103,14 +137,38 @@ const NewContent = () => {
                                 <td className='px-6 py-4'>{n.category}</td>
                                 <td className='px-6 py-4'>{convert(n.description).slice(0, 15)}...</td>
                                 <td className='px-6 py-4'>{n.date}</td>
-                                <td className='px-6 py-4'>
-                                    <span className='px-2 py-[2px] bg-green-100 text-green-800 rounded-lg text-xs cursor-pointer' >{n.status}</span>
-                                </td>
+                                {
+                                    store?.userInfo?.role === 'admin' ? <td className='px-6 py-4'>
+                                        {
+                                            n.status === 'pending' && <span onClick={() => update_status('active', n._id)} className='px-2 py-[2px] bg-blue-100 text-blue-800 rounded-lg text-xs cursor-pointer' >{res.loader && res.id === n._id ? 'Loading...' : n.status}</span>
+                                        }
+                                        {
+                                            n.status === 'active' && <span onClick={() => update_status('deactive', n._id)} className='px-2 py-[2px] bg-green-100 text-green-800 rounded-lg text-xs cursor-pointer' >{res.loader && res.id === n._id ? 'Loading...' : n.status}</span>
+                                        }
+                                        {
+                                            n.status === 'deactive' && <span onClick={() => update_status('active', n._id)} className='px-2 py-[2px] bg-red-100 text-red-800 rounded-lg text-xs cursor-pointer' >{res.loader && res.id === n._id ? 'Loading...' : n.status}</span>
+                                        }
+                                    </td> : <td className='px-6 py-4'>
+                                        {
+                                            n.status === 'pending' && <span className='px-2 py-[2px] bg-blue-100 text-blue-800 rounded-lg text-xs cursor-pointer' >{n.status}</span>
+                                        }
+                                        {
+                                            n.status === 'active' && <span className='px-2 py-[2px] bg-green-100 text-green-800 rounded-lg text-xs cursor-pointer' >{n.status}</span>
+                                        }
+                                        {
+                                            n.status === 'deactive' && <span className='px-2 py-[2px] bg-red-100 text-red-800 rounded-lg text-xs cursor-pointer' >{n.status}</span>
+                                        }
+                                    </td>
+                                }
                                 <td className='px-6 py-4'>
                                     <div className='flex justify-start items-center gap-x-4 text-white'>
                                         <Link className='p-[6px] bg-green-500 rounded hover:shadow-lg hover:shadow-green-500/50'><FaEye /></Link>
-                                        <Link to={`/dashboard/news/edit/${n._id}`} className='p-[6px] bg-yellow-500 rounded hover:shadow-lg hover:shadow-yellow-500/50'><FaEdit /></Link>
-                                        <div className='p-[6px] bg-red-500 rounded hover:shadow-lg hover:shadow-red-500/50'><FaTrash /></div>
+                                        {
+                                            store?.userInfo?.role === 'writer' && <>
+                                                <Link to={`/dashboard/news/edit/${n._id}`} className='p-[6px] bg-yellow-500 rounded hover:shadow-lg hover:shadow-yellow-500/50'><FaEdit /></Link>
+                                                <div className='p-[6px] bg-red-500 rounded hover:shadow-lg hover:shadow-red-500/50'><FaTrash /></div>
+                                            </>
+                                        }
                                     </div>
                                 </td>
                             </tr>)
