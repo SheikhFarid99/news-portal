@@ -19,6 +19,7 @@ router.get('/api/news/:news_id', middleware.auth, newsController.get_dashboard_s
 // website
 
 router.get('/api/all/news',newsController.get_all_news)
+router.get('/api/news/details/:slug',newsController.get_news)
 router.get('/api/category/all',newsController.get_categories)
 
 module.exports = router

@@ -212,6 +212,20 @@ class newsController {
         }
     }
 
+    get_news = async (req, res) => {
+
+        const { slug } = req.params
+        console.log(slug)
+
+        try {
+            const news = await newsModel.findOne({ slug })
+            return res.status(200).json({ news })
+        } catch (error) {
+            console.log(error.message)
+            return res.status(500).json({ message: 'Internal server error' })
+        }
+    }
+
     get_categories = async (req, res) => {
         try {
             const categories = await newsModel.aggregate([
