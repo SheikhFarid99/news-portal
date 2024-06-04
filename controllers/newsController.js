@@ -215,11 +215,29 @@ class newsController {
     get_news = async (req, res) => {
 
         const { slug } = req.params
-        console.log(slug)
+
 
         try {
-            const news = await newsModel.findOne({ slug })
-            return res.status(200).json({ news })
+
+            const news = await newsModel.findOneAndUpdate({ slug }, {
+                $inc: { count: 1 }
+            }, { new: true })
+
+            const relateNews = await newsModel.find({
+                $and: [
+                    {
+                        slug: {
+                            $ne: slug
+                        }
+                    }, {
+                        category: {
+                            $eq: news.category
+                        }
+                    }
+                ]
+            }).limit(4).sort({ createdAt: -1 })
+
+            return res.status(200).json({ news: news ? news : {}, relateNews })
         } catch (error) {
             console.log(error.message)
             return res.status(500).json({ message: 'Internal server error' })
@@ -244,6 +262,16 @@ class newsController {
                 }
             ])
             return res.status(200).json({ categories })
+        } catch (error) {
+            console.log(error.message)
+            return res.status(500).json({ message: 'Internal server error' })
+        }
+    }
+
+    get_popular_news = async (req, res) => {
+        try {
+            const popularNews = await newsModel.find({ status: 'active' }).sort({ count: -1 }).limit(4)
+            return res.status(200).json({ popularNews })
         } catch (error) {
             console.log(error.message)
             return res.status(500).json({ message: 'Internal server error' })
