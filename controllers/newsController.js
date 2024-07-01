@@ -101,6 +101,15 @@ class newsController {
         }
     }
 
+    get_recent_news = async (req, res) => {
+        try {
+            const news = await newsModel.find({ status: 'active' }).sort({ createdAt: -1 }).skip(6).limit(6)
+            return res.status(201).json({ news })
+        } catch (error) {
+            return res.status(500).json({ message: 'Internal server error' })
+        }
+    }
+
     add_images = async (req, res) => {
 
         const form = formidable({})
