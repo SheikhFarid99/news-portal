@@ -110,6 +110,30 @@ class newsController {
         }
     }
 
+    get_category_news = async (req, res) => {
+        const { category } = req.params
+
+        try {
+            const news = await newsModel.find({
+                $and: [
+                    {
+                        category: {
+                            $eq: category
+                        }
+                    },
+                    {
+                        status: {
+                            $eq: 'active'
+                        }
+                    }
+                ]
+            })
+            return res.status(201).json({ news })
+        } catch (error) {
+            return res.status(500).json({ message: 'Internal server error' })
+        }
+    }
+
     add_images = async (req, res) => {
 
         const form = formidable({})

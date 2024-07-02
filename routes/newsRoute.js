@@ -28,4 +28,6 @@ router.get('/api/recent/news', newsController.get_recent_news)
 router.get('/api/news/details/:slug', newsController.get_news)
 router.get('/api/category/all', newsController.get_categories)
 
+router.get('/api/category/news/:category', newsController.get_category_news)
+
 module.exports = router
