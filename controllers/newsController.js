@@ -111,6 +111,7 @@ class newsController {
     }
 
     get_category_news = async (req, res) => {
+
         const { category } = req.params
 
         try {
@@ -127,6 +128,21 @@ class newsController {
                         }
                     }
                 ]
+            })
+            return res.status(201).json({ news })
+        } catch (error) {
+            return res.status(500).json({ message: 'Internal server error' })
+        }
+    }
+
+    news_search = async (req, res) => {
+        const { value } = req.query
+        try {
+            const news = await newsModel.find({
+                status: 'active',
+                $text: {
+                    $search: value
+                }
             })
             return res.status(201).json({ news })
         } catch (error) {
